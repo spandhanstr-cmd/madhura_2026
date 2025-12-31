@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 With You ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #1b1b3a, #000);
+  color: white;
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+  transition: opacity 1.2s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  max-width: 520px;
+  opacity: 0.96;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 45px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff4d6d, #ff9aa2);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(255,77,109,0.4);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.glow {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+  to { text-shadow: 0 0 28px rgba(255,255,255,1); }
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  font-size: 1.7rem;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(110vh) scale(1); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-20vh) scale(1.7); opacity: 0; }
+}
+
+/* Fireworks */
+.firework {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: boom 1.3s ease-out forwards;
+}
+
+@keyframes boom {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(22); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Screen 1 -->
+<div class="screen" id="s1">
+  <h1 class="glow">Hey Madhura ♥️</h1>
+  <p>
+    It’s after midnight now…<br><br>
+    And the very first thing I wanted to do<br>
+    in <b>2026</b> was this —<br>
+    remind you how much you mean to me ✨
+  </p>
+  <button onclick="next()">Come closer 💖</button>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen hidden" id="s2">
+  <h1>Listen to me 🕯️</h1>
+  <p>
+    2025 gave me memories.<br>
+    But <b>you</b> gave them meaning.<br><br>
+
+    You became my comfort,<br>
+    my excitement,<br>
+    my favorite notification,<br>
+    my calm at the end of the day 🤍
+  </p>
+  <button onclick="next()">One more thing… 🫶</button>
+</div>
+
+<!-- Screen 3 FINAL -->
+<div class="screen hidden" id="s3">
+  <h1 class="glow">Welcome to 2026, My Love 💖</h1>
+  <p>
+    New year.<br>
+    New dreams.<br>
+    Same promise — <b>us</b>.<br><br>
+
+    I don’t care where this year takes us,<br>
+    as long as I get to walk it with you.<br><br>
+
+    Every laugh.<br>
+    Every fight.<br>
+    Every quiet moment in between —<br>
+    I choose <b>you</b>. Always.<br><br>
+
+    Happy New Year, my Kanna ♥️<br>
+    <b>– Spandhan</b>
+  </p>
+  <button onclick="finale()">Tap. Trust me 🎆</button>
+</div>
+
+<!-- 🎶 LOCAL MUSIC FILE -->
+<audio id="music" loop>
+  <source src="our_song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let step = 1;
+
+function next() {
+  document.getElementById("s" + step).classList.add("hidden");
+  step++;
+  document.getElementById("s" + step).classList.remove("hidden");
+}
+
+function finale() {
+  startMusic();
+  hearts();
+  fireworks();
+}
+
+function startMusic() {
+  const music = document.getElementById("music");
+  music.volume = 0;
+  music.play();
+
+  let v = 0;
+  const fade = setInterval(() => {
+    if (v < 1) {
+      v += 0.05;
+      music.volume = v;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+
+function hearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "♥️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+  }, 200);
+}
+
+function fireworks() {
+  setInterval(() => {
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.top = Math.random() * 50 + "vh";
+    f.style.background = `hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1300);
+  }, 350);
+}
+</script>
+
+</body>
+</html>
